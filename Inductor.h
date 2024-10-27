@@ -10,10 +10,10 @@ class Inductor : public Component{
 
 public:
 	Inductor(double inductorValue, float red, float green, float blue, const std::string& inductorName);
-	std::string GetName() const;
-	void Update();
-	double GetVoltage(double _current, double timestep);
-	void Display();
+	std::string GetName() const override;
+	void Update() override;
+	double GetVoltage(double _current, double timestep) override;
+	void Display() override;
 };
 
 #endif// _INDUCTOR_H_

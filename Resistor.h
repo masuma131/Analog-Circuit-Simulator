@@ -10,10 +10,10 @@ class Resistor : public Component {
 
 public:
 	Resistor(double resistorValue, float red, float green, float blue, const std::string& resistorName);
-	std::string GetName() const;
-	void Update();
-	double GetVoltage(double _current, double timestep);
-	void Display();
+	std::string GetName() const override;
+	void Update() override;
+	double GetVoltage(double _current, double timestep) override;
+	void Display() override;
 };
 
 #endif// _RESISTOR_H_
