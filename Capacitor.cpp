@@ -1,6 +1,5 @@
 //Capacitor.cpp - functions implemention for Capacitor
 
-// TODO: Complete the functions
 
 #include "Capacitor.h"
 
