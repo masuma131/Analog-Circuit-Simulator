@@ -1,6 +1,5 @@
 //Resistor.cpp - functions implemention for Resistor
 
-// TODO: Complete the functions
 
 #include "Resistor.h"
 
@@ -18,6 +17,7 @@ std::string Resistor::GetName() const {
 };
 
 void Resistor::Update() {
+    // Resistors don't have internal states that change over time
 
 };
 
@@ -27,5 +27,5 @@ double Resistor::GetVoltage(double _current, double timestep) {
 };
 
 void Resistor::Display() {
-    AnalogCircuit::display(Red, Green, Blue); // RGB display based on inductor color
+    AnalogCircuit::display(Red, Green, Blue); // RGB display based on resistor color
 };
