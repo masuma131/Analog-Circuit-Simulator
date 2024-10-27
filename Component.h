@@ -20,6 +20,7 @@ public:
 	virtual void Update() = 0;
 	virtual double GetVoltage(double _current, double timestep)=0;
 	virtual void Display() = 0;
+
 };
 
 #endif// _COMPONENT_H_
