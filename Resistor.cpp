@@ -14,7 +14,7 @@ Resistor::Resistor(double resistorValue, float red, float green, float blue, con
 
 std::string Resistor::GetName() const {
 
-	return "Nothing";
+	return name;
 };
 
 void Resistor::Update() {
@@ -23,9 +23,9 @@ void Resistor::Update() {
 
 double Resistor::GetVoltage(double _current, double timestep) {
 
-	return 0.0;
+	return _current * resistance;
 };
 
 void Resistor::Display() {
-
+    AnalogCircuit::display(Red, Green, Blue); // RGB display based on inductor color
 };
