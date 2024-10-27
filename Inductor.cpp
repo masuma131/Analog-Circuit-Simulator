@@ -27,5 +27,6 @@ double Inductor::GetVoltage(double _current, double timestep) {
 };
 
 void Inductor::Display() {
+    //incomplete
     AnalogCircuit::display(Red, Green, Blue); // RGB display based on inductor color
 };

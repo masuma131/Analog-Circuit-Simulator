@@ -28,5 +28,6 @@ double Capacitor::GetVoltage(double _current, double timestep) {
 };
 
 void Capacitor::Display() {
+    //TODO: incomplete
     AnalogCircuit::display(Red, Green, Blue); // RGB display based on capacitor color
 };
