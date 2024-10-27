@@ -14,7 +14,7 @@ Inductor::Inductor(double inductorValue, float red, float green, float blue, con
 
 std::string Inductor::GetName() const {
 
-	return "Nothing";
+	return name;
 };
 
 void Inductor::Update() {

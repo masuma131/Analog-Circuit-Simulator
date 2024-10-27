@@ -14,8 +14,9 @@ Capacitor::Capacitor(double capacitorValue, float red, float green, float blue, 
 
 std::string Capacitor::GetName() const {
 
-	return "Nothing";
+	return name;
 };
+
 
 void Capacitor::Update() {
 
