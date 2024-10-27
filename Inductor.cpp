@@ -1,6 +1,5 @@
 //Inductor.cpp - functions implemention for Inductor
 
-// TODO: Complete the functions
 
 #include "Inductor.h"
 

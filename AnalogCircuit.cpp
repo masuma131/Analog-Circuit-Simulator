@@ -44,7 +44,15 @@ void AnalogCircuit::display(float R, float G, float B) {//draw a point on the sc
 }
 
 // TODO:dump data to filename
-AnalogCircuit::AnalogCircuit(string filename) {//dump data to filename, initialize variables
+// Constructor: dump data to filename, initialize variables
+AnalogCircuit::AnalogCircuit(string filename) {
+	fout.open(filename);
+	if (!fout.is_open()) {
+		cerr << "Failed to open output file: " << filename << endl;
+		exit(1);
+	}
+	fout << setw(12) << "Time" << setw(12) << "Current" << setw(12) << "Voltage" << endl;
+	I = 0.0; // initial current
 }
 
 void AnalogCircuit::run() {
@@ -58,14 +66,30 @@ void AnalogCircuit::run() {
 	// TODO:
 	//Vertical line
 
+	// Draw horizontal and vertical lines
+	glColor3f(1.0, 1.0, 1.0); // White color for axis lines
+	glBegin(GL_LINES);
+	glVertex2f(-1.0, 0.0); glVertex2f(1.0, 0.0); // Horizontal line
+	glVertex2f(0.0, -1.0); glVertex2f(0.0, 1.0); // Vertical line
+	glEnd();
+
 	// TODO:
 	//Horizontal line markers
 
 	// TODO:
 	//Vertical line markers
 
+	// Draw line markers
+	for (int i = -10; i <= 10; i++) {
+		glBegin(GL_LINES);
+		glVertex2f(i * 0.1, 0.05); glVertex2f(i * 0.1, -0.05); // Horizontal markers
+		glVertex2f(0.05, i * 0.1); glVertex2f(-0.05, i * 0.1); // Vertical markers
+		glEnd();
+	}
+
 	// TODO:
     //Display each component's name and colour
+
 
 	// TODO:
     //Run the simulation for the first 0.06 seconds (timeMax is 0.1 sec)
