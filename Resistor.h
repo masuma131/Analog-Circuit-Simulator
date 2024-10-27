@@ -1,5 +1,7 @@
 //Resistor.h - header file for Resistor
 
+#include "AnalogCircuit.h"
+
 #ifndef _RESISTOR_H_
 #define _RESISTOR_H_
 

@@ -43,6 +43,7 @@ void AnalogCircuit::display(float R, float G, float B) {//draw a point on the sc
 	glFlush();
 }
 
+// TODO:dump data to filename
 AnalogCircuit::AnalogCircuit(string filename) {//dump data to filename, initialize variables
 }
 
@@ -51,16 +52,22 @@ void AnalogCircuit::run() {
 	component.push_back(new Inductor(0.020, 0.0, 0.0, 1.0, "L1"));//20mH, Blue
 	component.push_back(new Resistor(10, 1.0, 0.0, 0.0, "R1"));//10ohm, Red
 
+	// TODO:
 	//Horizontal line
-
+	// 
+	// TODO:
 	//Vertical line
 
+	// TODO:
 	//Horizontal line markers
 
+	// TODO:
 	//Vertical line markers
 
+	// TODO:
     //Display each component's name and colour
 
+	// TODO:
     //Run the simulation for the first 0.06 seconds (timeMax is 0.1 sec)
 	//Dump data to a file as well as display on the screen
 	for (double time = 0.0; time < 0.6*timeMax; time += T) {
@@ -71,6 +78,7 @@ void AnalogCircuit::run() {
 		CostFunctionV(I, V);
 	}
 
+	// TODO:
 	//Run the simulation to the end (timeMax is 0.1 sec)
 	//Dump data to a file as well as display on the screen
 	for (double time = 0.6*timeMax; time < timeMax; time += T) {
@@ -126,5 +134,6 @@ void AnalogCircuit::CostFunctionV(double &current, double voltage) {
 	current = I1;
 }
 
+// TODO:
 AnalogCircuit::~AnalogCircuit() {//perform cleanup
 }

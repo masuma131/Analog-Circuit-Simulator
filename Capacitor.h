@@ -1,5 +1,7 @@
 //Capacitor.h - header file for Capacitor
 
+#include "AnalogCircuit.h"
+
 #ifndef _CAPACITOR_H_
 #define _CAPACITOR_H_
 
@@ -7,6 +9,7 @@
 
 class Capacitor : public Component{
 	double capacitance;
+	double prev_voltage;
 public:
 	Capacitor(double capacitorValue, float red, float green, float blue, const std::string& capacitorName);
 

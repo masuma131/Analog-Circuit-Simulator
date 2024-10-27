@@ -5,7 +5,7 @@
 #include "Capacitor.h"
 
 Capacitor::Capacitor(double capacitorValue, float red, float green, float blue, const std::string& capacitorName)
-    : capacitance(capacitorValue) {
+    : capacitance(capacitorValue), prev_voltage(0.0) {
     Red = red;
     Green = green;
     Blue = blue;
@@ -22,8 +22,9 @@ void Capacitor::Update() {
 };
 
 double Capacitor::GetVoltage(double _current, double timestep) {
-
-	return 0.0;
+    double voltage = prev_voltage + (_current * timestep / capacitance);
+    prev_voltage = voltage;
+	return voltage;
 };
 
 void Capacitor::Display() {

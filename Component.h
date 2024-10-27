@@ -8,7 +8,6 @@
 #define _COMPONENT_H_
 
 #include <iostream>
-#include "AnalogCircuit.h"
 
 class Component {
 protected:

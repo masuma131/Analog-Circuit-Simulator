@@ -5,7 +5,7 @@
 #include "Inductor.h"
 
 Inductor::Inductor(double inductorValue, float red, float green, float blue, const std::string& inductorName)
-    : inductance(inductorValue) {
+    : inductance(inductorValue), prev_current(0.0) {
     Red = red;
     Green = green;
     Blue = blue;
@@ -18,14 +18,15 @@ std::string Inductor::GetName() const {
 };
 
 void Inductor::Update() {
-
+    
 };
 
 double Inductor::GetVoltage(double _current, double timestep) {
-
-	return 0.0;
+    double voltage = inductance * (_current - prev_current) / timestep;
+    prev_current = _current;
+    return voltage;
 };
 
 void Inductor::Display() {
-
+    AnalogCircuit::display(Red, Green, Blue); // RGB display based on inductor color
 };

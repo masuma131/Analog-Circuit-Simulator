@@ -1,5 +1,7 @@
 //Inductor.h - header file for Inductor
 
+#include "AnalogCircuit.h"
+
 #ifndef _INDUCTOR_H_
 #define _INDUCTOR_H_
 
@@ -7,6 +9,7 @@
 
 class Inductor : public Component{
 	double inductance;
+	double prev_current;
 
 public:
 	Inductor(double inductorValue, float red, float green, float blue, const std::string& inductorName);
