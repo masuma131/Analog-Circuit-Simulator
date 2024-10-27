@@ -31,7 +31,7 @@ void start() {
 	cout << "DONE!" << endl;
 }
 
-void AnalogCircuit::display(float R, float G, float B) {//draw a point on the screen
+void AnalogCircuit::display(float R, float G, float B)  {//draw a point on the screen
 	//	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(R, G, B);//RGB
 	glBegin(GL_POINTS);
@@ -40,43 +40,91 @@ void AnalogCircuit::display(float R, float G, float B) {//draw a point on the sc
 	glFlush();
 }
 
-AnalogCircuit::AnalogCircuit(string filename) {//dump data to filename, initialize variables
+AnalogCircuit::AnalogCircuit(string filename) : fout(filename) {
+	//dump data to filename, initialize variables
+		if (!fout.is_open()) {
+			std::cerr << "Error opening file: " << filename << std::endl;
+		}
+		I = 0.0;  
 }
+
+
+// TODO: Need to fix display 
 
 void AnalogCircuit::run() {
 	component.push_back(new Capacitor(0.000100, 0.0, 1.0, 0.0, "C1"));//100uF, Green
 	component.push_back(new Inductor(0.020, 0.0, 0.0, 1.0, "L1"));//20mH, Blue
 	component.push_back(new Resistor(10, 1.0, 0.0, 0.0, "R1"));//10ohm, Red
 
+	glColor3f(255.0, 255.0, 255.0);
+
 	//Horizontal line
+	glBegin(GL_LINES);
+	glVertex2f(0, windowHeight / static_cast<GLfloat>(2));
+	glVertex2f(windowWidth, windowHeight / static_cast<GLfloat>(2));
+	glEnd();
 
 	//Vertical line
+	glBegin(GL_LINES);
+	glVertex2f( windowWidth / static_cast<GLfloat>(2), 0);
+	glVertex2f(windowWidth / static_cast<GLfloat>(2), windowHeight);
+	glEnd();
 
 	//Horizontal line markers
+	for (int i = 0; i <= windowWidth; i += 50) {
+		glBegin(GL_LINES);
+		glVertex2f(i, windowHeight / static_cast<GLfloat>(2) - 5);
+		glVertex2f(i, windowHeight / static_cast<GLfloat>(2) + 5);
+		glEnd();
+	}
 
 	//Vertical line markers
+	for (int i = 0; i <= windowWidth; i += 50) {
+		glBegin(GL_LINES);
+		glVertex2f(windowWidth / static_cast<GLfloat>(2) - 5, i);
+		glVertex2f(windowWidth / static_cast<GLfloat>(2) + 5, i);
+		glEnd();
+	}
 
 	//Display each component's name and colour
+	for (auto& c : component) {
+		cout << "Name: " << c->GetName() << endl;
+		cout << "Color: ";
+		c->Display();
+	}
 
-	//Run the simulation for the first 0.06 seconds (timeMax is 0.1 sec)
+	
 	//Dump data to a file as well as display on the screen
+	fout << "Time(s)\tCurrent(A)\tVoltage(V)\n";  // Header for the output file
+
+	// Run simulation for the first 0.06 seconds with sinusoidal voltage
 	for (double time = 0.0; time < 0.6 * timeMax; time += T) {
 		double V = Vpeak * sin(2.0 * M_PI * freq * time);
 
-		//...
-
+		// Calculate current and update the output for this voltage
 		CostFunctionV(I, V);
+
+		// Output data to the console
+		std::cout << "Time: " << time << " s, Voltage: " << V << " V, Current: " << I << " A" << std::endl;
+
+		// Save data to the file
+		fout << time << '\t' << I << '\t' << V << '\n';
 	}
 
-	//Run the simulation to the end (timeMax is 0.1 sec)
-	//Dump data to a file as well as display on the screen
+	// Run simulation for the remaining time up to 0.1 seconds with zero voltage
 	for (double time = 0.6 * timeMax; time < timeMax; time += T) {
 		double V = 0.0;
 
-		//...
-
+		// Calculate current and update the output for zero voltage
 		CostFunctionV(I, V);
+
+		// Output data to the console
+		std::cout << "Time: " << time << " s, Voltage: " << V << " V, Current: " << I << " A" << std::endl;
+
+		// Save data to the file
+		fout << time << '\t' << I << '\t' << V << '\n';
 	}
+
 }
 
 void AnalogCircuit::CostFunctionV(double& current, double voltage) {
@@ -114,8 +162,7 @@ void AnalogCircuit::CostFunctionV(double& current, double voltage) {
 	list<Component*>::iterator it;
 	for (it = component.begin(); it != component.end(); ++it) {
 		fout << setw(12) << (*it)->GetVoltage(I1, T);
-		ypos = (windowHeight * (*it)->GetVoltage(I1, T) / Vpeak) / 2.0 + scalingFactor * windowHeight / 2.0;
-		(*it)->Display();
+		ypos = static_cast<int>((windowHeight * (*it)->GetVoltage(I1, T) / Vpeak) / 2.0 + scalingFactor * windowHeight / 2.0);
 		(*it)->Update();
 	}
 	fout << endl;
@@ -123,5 +170,15 @@ void AnalogCircuit::CostFunctionV(double& current, double voltage) {
 	current = I1;
 }
 
-AnalogCircuit::~AnalogCircuit() {//perform cleanup
+AnalogCircuit::~AnalogCircuit() {
+	//perform cleanup
+	for (auto& comp : component) {
+		delete comp;
+	}
+	component.clear();
+
+	// Close file output stream
+	if (fout.is_open()) {
+		fout.close();
+	}
 }

@@ -13,7 +13,7 @@
 #include <gl/GLU.h>    
 #include <gl/glut.h>
 #include <gl/freeglut.h>
-#include "Component.h"
+#include "Component.h"  // Include the Component header file
 
 extern int windowWidth, windowHeight;
 extern double scalingFactor;
