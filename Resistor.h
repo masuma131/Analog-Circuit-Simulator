@@ -5,6 +5,7 @@
 #ifndef _RESISTOR_H_
 #define _RESISTOR_H_
 
+#include "AnalogCircuit.h"
 #include "Component.h"
 
 class Resistor : public Component {

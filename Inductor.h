@@ -1,14 +1,14 @@
 //Inductor.h - header file for Inductor
 
-#include "AnalogCircuit.h"
 
 #ifndef _INDUCTOR_H_
 #define _INDUCTOR_H_
-
+#include "AnalogCircuit.h"
 #include "Component.h"
 
 class Inductor : public Component{
 	double inductance;
+	double curr_current;
 	double prev_current;
 
 public:

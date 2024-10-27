@@ -4,7 +4,7 @@
 #include "Inductor.h"
 
 Inductor::Inductor(double inductorValue, float red, float green, float blue, const std::string& inductorName)
-    : inductance(inductorValue), prev_current(0.0) {
+    : inductance(inductorValue), curr_current(0.0), prev_current(0.0) {
     Red = red;
     Green = green;
     Blue = blue;
@@ -17,12 +17,12 @@ std::string Inductor::GetName() const {
 };
 
 void Inductor::Update() {
-    
+    prev_current = curr_current;
 };
 
 double Inductor::GetVoltage(double _current, double timestep) {
     double voltage = inductance * (_current - prev_current) / timestep;
-    prev_current = _current;
+    curr_current = _current;
     return voltage;
 };
 
