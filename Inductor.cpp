@@ -1,5 +1,4 @@
-//Masuma Begum, Mary-Anne Chinonyelum Ibeh, Chloe Quijano
-// 
+
 //Inductor.cpp - functions implemention for Inductor
 
 #include "Inductor.h"

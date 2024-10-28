@@ -1,4 +1,4 @@
-//Masuma Begum, Mary-Anne Chinonyelum Ibeh, Chloe Quijano
+
 
 //Capacitor.cpp - functions implemention for Capacitor
 

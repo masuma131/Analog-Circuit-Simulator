@@ -1,4 +1,4 @@
-//Masuma Begum, Mary-Anne Chinonyelum Ibeh, Chloe Quijano
+
 //Resistor.cpp - functions implemention for Resistor
 
 #include "Resistor.h"
