@@ -1,7 +1,8 @@
+//Masuma Begum, Mary-Anne Chinonyelum Ibeh, Chloe Quijano
 //AnalogCircuit.cpp - function definitions for the analog circuit
-//
 // 20-May-22  M. Watler         Created.
 // 27-May-22  M. Watler         Added graphical display.
+
 
 #include <iomanip>//setw
 #include <iostream>
@@ -20,6 +21,7 @@ int xpos, ypos;
 int windowWidth, windowHeight;
 double scalingFactor;
 
+// Entry point of the program
 void start() {
 	cout << "BEGIN" << endl;
 	AnalogCircuit circuit("RLC.dat");
@@ -31,6 +33,7 @@ void start() {
 	cout << "DONE!" << endl;
 }
 
+// Function to display a point on the screen
 void AnalogCircuit::display(float R, float G, float B)  {//draw a point on the screen
 	//	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(R, G, B);//RGB
@@ -40,6 +43,7 @@ void AnalogCircuit::display(float R, float G, float B)  {//draw a point on the s
 	glFlush();
 }
 
+// Constructor initializes the circuit and opens the output file
 AnalogCircuit::AnalogCircuit(string filename) : fout(filename) {
 	//dump data to filename, initialize variables
 		if (!fout.is_open()) {
@@ -48,9 +52,7 @@ AnalogCircuit::AnalogCircuit(string filename) : fout(filename) {
 		I = 0.0;  
 }
 
-
-// TODO: Need to fix display 
-
+// Main function to run the simulation
 void AnalogCircuit::run() {
 	component.push_back(new Capacitor(0.000100, 0.0, 1.0, 0.0, "C1"));//100uF, Green
 	component.push_back(new Inductor(0.020, 0.0, 0.0, 1.0, "L1"));//20mH, Blue
@@ -58,37 +60,37 @@ void AnalogCircuit::run() {
 
 	glColor3f(255.0, 255.0, 255.0);
 
-	//Horizontal line
+
+	// Horizontal line
 	glBegin(GL_LINES);
-	glVertex2f(0, windowHeight / static_cast<GLfloat>(2));
-	glVertex2f(windowWidth, windowHeight / static_cast<GLfloat>(2));
+	glVertex2f(0, scalingFactor * windowHeight / 2.0); // Starting from the left edge with scaling applied
+	glVertex2f(windowWidth, scalingFactor * windowHeight / 2.0); // Going across the width of the window
 	glEnd();
 
-	//Vertical line
+	// Draw a vertical line at xoffset
 	glBegin(GL_LINES);
-	glVertex2f(xoffset, 0);
-	glVertex2f(xoffset, windowHeight);
+	glVertex2f(xoffset, 0); // Starting from the bottom edge
+	glVertex2f(xoffset, scalingFactor * windowHeight); // Going to the top of the window with scaling applied
 	glEnd();
 
 
-	//Horizontal line markers
+	//Draw horizontal line markers every 50 pixels
 	for (int i = 0; i <= windowWidth; i += 50) {
 		glBegin(GL_LINES);
-		glVertex2f(i, windowHeight / static_cast<GLfloat>(2) - 10);
-		glVertex2f(i, windowHeight / static_cast<GLfloat>(2) + 10);
+		glVertex2f(i, scalingFactor * windowHeight / 2.0 - 10); // Adjust to keep markers centered
+		glVertex2f(i, scalingFactor * windowHeight / 2.0 + 10); // Adjust to keep markers centered
 		glEnd();
 	}
 
-	//Vertical line markers
-
-	//positive direction markers
+	//vertical line markers
+	//Draw positive direction vertical markers every 50 pixels
 	for (ypos = scalingFactor * windowHeight / 2.0; ypos < scalingFactor * windowHeight; ypos += 50) {
 		glBegin(GL_LINES);
 		glVertex2f(xoffset + 10, ypos);
 		glVertex2f(xoffset - 10, ypos);
 		glEnd();
 	}
-	// Negative direction markers
+	// Draw negative direction vertical markers every 50 pixels
 	for (ypos = scalingFactor * windowHeight / 2.0; ypos > 0; ypos -= 50) {
 		glBegin(GL_LINES);
 		glVertex2f(xoffset + 10, ypos);  // Right side of the vertical line
@@ -118,7 +120,7 @@ void AnalogCircuit::run() {
 		double V = Vpeak * sin(2.0 * M_PI * freq * time);
 
 		// Output data to the console
-		std::cout << "Time: " << time << " s, Voltage: " << V << " V, Current: " << I << " A" << std::endl;
+		// std::cout << "Time: " << time << " s, Voltage: " << V << " V, Current: " << I << " A" << std::endl;
 
 		// Save data to the file
 		fout.setf(ios::fixed);
@@ -133,18 +135,6 @@ void AnalogCircuit::run() {
 		// Calculate current and update the output for this voltage
 		CostFunctionV(I, V);
 
-		// Calculate and display each component’s current
-		for (auto& comp : component) {
-			double compVoltage = comp->GetVoltage(I, T);
-
-			// Set y position for each component's current
-			ypos = static_cast<int>((windowHeight * compVoltage / Vpeak) / 2.0 + scalingFactor * windowHeight / 2.0);
-
-			// Display current sine wave for the component in its specific color
-			comp->Display();
-		}
-
-
 	}
 
 	// Run simulation for the remaining time up to 0.1 seconds with zero voltage
@@ -152,7 +142,7 @@ void AnalogCircuit::run() {
 		double V = 0.0;
 
 		// Output data to the console
-		std::cout << "Time: " << time << " s, Voltage: " << V << " V, Current: " << I << " A" << std::endl;
+		//std::cout << "Time: " << time << " s, Voltage: " << V << " V, Current: " << I << " A" << std::endl;
 
 		// Save data to the file
 		fout.setf(ios::fixed);
@@ -166,7 +156,6 @@ void AnalogCircuit::run() {
 
 		// Calculate current and update the output for zero voltage
 		CostFunctionV(I, V);
-
 
 	}
 
@@ -205,9 +194,11 @@ void AnalogCircuit::CostFunctionV(double& current, double voltage) {
 
 	fout << setw(12) << I1;
 	list<Component*>::iterator it;
+
 	for (it = component.begin(); it != component.end(); ++it) {
 		fout << setw(12) << (*it)->GetVoltage(I1, T);
 		ypos = static_cast<int>((windowHeight * (*it)->GetVoltage(I1, T) / Vpeak) / 2.0 + scalingFactor * windowHeight / 2.0);
+		(*it)->Display();
 		(*it)->Update();
 	}
 	fout << endl;

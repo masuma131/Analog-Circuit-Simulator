@@ -1,7 +1,5 @@
 //Capacitor.h - header file for Capacitor
 
-
-
 #ifndef _CAPACITOR_H_
 #define _CAPACITOR_H_
 
