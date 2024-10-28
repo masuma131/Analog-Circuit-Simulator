@@ -27,6 +27,5 @@ double Resistor::GetVoltage(double _current, double timestep) {
 };
 
 void Resistor::Display() {
-    //TODO: incomplete
-    AnalogCircuit::display(Red, Green, Blue); // RGB display based on resistor color
+    AnalogCircuit::display(Red, Green, Blue); 
 };

@@ -66,63 +66,108 @@ void AnalogCircuit::run() {
 
 	//Vertical line
 	glBegin(GL_LINES);
-	glVertex2f( windowWidth / static_cast<GLfloat>(2), 0);
-	glVertex2f(windowWidth / static_cast<GLfloat>(2), windowHeight);
+	glVertex2f(xoffset, 0);
+	glVertex2f(xoffset, windowHeight);
 	glEnd();
+
 
 	//Horizontal line markers
 	for (int i = 0; i <= windowWidth; i += 50) {
 		glBegin(GL_LINES);
-		glVertex2f(i, windowHeight / static_cast<GLfloat>(2) - 5);
-		glVertex2f(i, windowHeight / static_cast<GLfloat>(2) + 5);
+		glVertex2f(i, windowHeight / static_cast<GLfloat>(2) - 10);
+		glVertex2f(i, windowHeight / static_cast<GLfloat>(2) + 10);
 		glEnd();
 	}
 
 	//Vertical line markers
-	for (int i = 0; i <= windowWidth; i += 50) {
+
+	//positive direction markers
+	for (ypos = scalingFactor * windowHeight / 2.0; ypos < scalingFactor * windowHeight; ypos += 50) {
 		glBegin(GL_LINES);
-		glVertex2f(windowWidth / static_cast<GLfloat>(2) - 5, i);
-		glVertex2f(windowWidth / static_cast<GLfloat>(2) + 5, i);
+		glVertex2f(xoffset + 10, ypos);
+		glVertex2f(xoffset - 10, ypos);
+		glEnd();
+	}
+	// Negative direction markers
+	for (ypos = scalingFactor * windowHeight / 2.0; ypos > 0; ypos -= 50) {
+		glBegin(GL_LINES);
+		glVertex2f(xoffset + 10, ypos);  // Right side of the vertical line
+		glVertex2f(xoffset - 10, ypos);  // Left side of the vertical line
 		glEnd();
 	}
 
 	//Display each component's name and colour
-	for (auto& c : component) {
-		cout << "Name: " << c->GetName() << endl;
-		cout << "Color: ";
-		c->Display();
-	}
+	list<Component*>::iterator it;
+	ypos = windowHeight - 20;
+	for (it = component.begin(); it != component.end(); ++it) {
+		glColor3f(1.0, 1.0, 1.0);
+		glRasterPos2f(0, ypos);
+		for (int i = 0; i < (*it)->GetName().length(); ++i) glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, (*it)->GetName()[i]);
+		for (xpos = xoffset - 30; xpos < xoffset - 20; xpos += 1) {
+			(*it)->Display();
+		}
+		ypos -= 15;
 
+	}
 	
 	//Dump data to a file as well as display on the screen
-	fout << "Time(s)\tCurrent(A)\tVoltage(V)\n";  // Header for the output file
+	fout << "		time		Voltage		Current		V_cap		V_ind		V_res" <<endl;;  // Header for the output file
 
 	// Run simulation for the first 0.06 seconds with sinusoidal voltage
 	for (double time = 0.0; time < 0.6 * timeMax; time += T) {
 		double V = Vpeak * sin(2.0 * M_PI * freq * time);
 
-		// Calculate current and update the output for this voltage
-		CostFunctionV(I, V);
-
 		// Output data to the console
 		std::cout << "Time: " << time << " s, Voltage: " << V << " V, Current: " << I << " A" << std::endl;
 
 		// Save data to the file
-		fout << time << '\t' << I << '\t' << V << '\n';
+		fout.setf(ios::fixed);
+		fout.precision(7);
+		fout << setw(12) << time;
+		fout << setw(12) << V;
+
+		glBegin(GL_POINTS);
+		xpos = time * (windowWidth - xoffset) / timeMax + xoffset;
+		ypos = (windowHeight * V / Vpeak) / 2.0 + scalingFactor * windowHeight / 2.0;
+		display(1.0, 1.0, 1.0);
+		// Calculate current and update the output for this voltage
+		CostFunctionV(I, V);
+
+		// Calculate and display each component’s current
+		for (auto& comp : component) {
+			double compVoltage = comp->GetVoltage(I, T);
+
+			// Set y position for each component's current
+			ypos = static_cast<int>((windowHeight * compVoltage / Vpeak) / 2.0 + scalingFactor * windowHeight / 2.0);
+
+			// Display current sine wave for the component in its specific color
+			comp->Display();
+		}
+
+
 	}
 
 	// Run simulation for the remaining time up to 0.1 seconds with zero voltage
 	for (double time = 0.6 * timeMax; time < timeMax; time += T) {
 		double V = 0.0;
 
-		// Calculate current and update the output for zero voltage
-		CostFunctionV(I, V);
-
 		// Output data to the console
 		std::cout << "Time: " << time << " s, Voltage: " << V << " V, Current: " << I << " A" << std::endl;
 
 		// Save data to the file
-		fout << time << '\t' << I << '\t' << V << '\n';
+		fout.setf(ios::fixed);
+		fout.precision(7);
+		fout << setw(12) << time;
+		fout << setw(12) << V;
+		glBegin(GL_POINTS);
+		xpos = time * (windowWidth - xoffset) / timeMax + xoffset;
+		ypos = (windowHeight * V / Vpeak) / 2.0 + scalingFactor * windowHeight / 2.0;
+		display(1.0, 1.0, 1.0);
+
+		// Calculate current and update the output for zero voltage
+		CostFunctionV(I, V);
+
+
 	}
 
 }
