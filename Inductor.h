@@ -3,6 +3,7 @@
 
 #ifndef _INDUCTOR_H_
 #define _INDUCTOR_H_
+
 #include "AnalogCircuit.h"
 #include "Component.h"
 

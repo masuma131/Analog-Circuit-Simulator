@@ -12,7 +12,6 @@ class Capacitor : public Component{
 	double prev_voltage;
 public:
 	Capacitor(double capacitorValue, float red, float green, float blue, const std::string& capacitorName);
-
 	std::string GetName() const override;
 	void Update() override;
 	double GetVoltage(double _current, double timestep) override;
