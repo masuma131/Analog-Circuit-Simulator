@@ -1,0 +1,12 @@
+1. You may notice that the cost function is based on Euler's method. What other method(s) might be applied to enable it to run more efficiently?
+    - Midpoint method and Runge-Kutta method.
+
+2. You may notice that the cost function has no intelligence. It does not learn. This heuristic algorithm does not comply with the principles of machine learning. How might you add intelligence to our cost function to enable it to run more efficiently?
+    - To make the cost function more intelligent, we could implement a machine learning model, such as a neural network or a regression model, trained on voltage and current data. This model could predict the current given a new voltage input by learning the relationships in the circuit.
+
+3. Devise a completely different way to implement the cost function. Is there some quicker way of guessing the present current knowing the previous voltage and current?
+    -  use predictive models like regression. Using a model trained on previous voltage-current relationships could speed up the estimation for present current. This approach may also allow the algorithm to make slightly adaptive predictions, especially useful in non-linear systems.
+
+4. You may not like the way this project was designed and implemented. What changes would you suggest and why (ie. graphics, circuit components, using C++, ...).
+    - Enhance data logging by saving output data in a structured format (e.g., CSV or JSON) for easy analysis. For visualizations by providing more detailed plotting options, improving insights into circuit behavior.
+    - Adding GUI library like Qt, instead of just OpenGL for more interactive controls, allowing users to edit configuration during runtime.
