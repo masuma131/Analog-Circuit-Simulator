@@ -53,7 +53,7 @@ To set up and run the Analog Circuit Simulator, follow these steps:
 2. **Open the Project in Visual Studio**
    Open the .sln file provided in the repository using Microsoft Visual Studio.
 
-4. **Install OpenGL Dependencies**
+5. **Install OpenGL Dependencies**
 
    Right-click on "References" in the Solution Explorer and select Manage NuGet Packages.
    Open the Package Manager Console tab at the bottom of Visual Studio.
