@@ -50,8 +50,7 @@ To set up and run the Analog Circuit Simulator, follow these steps:
    ```bash
    git clone https://github.com/masuma131/Analog-Circuit-Simulator.git
     ```
-2. **Open the Project in Visual Studio**
-   Open the .sln file provided in the repository using Microsoft Visual Studio.
+2. Open the .sln file provided in the repository using Microsoft Visual Studio.
 
 5. **Install OpenGL Dependencies**
 
