@@ -1,7 +1,4 @@
 //AnalogCircuit.h - header file for the analog circuit
-//
-// 21-May-22  M. Watler         Created.
-// 27-May-22  M. Watler         Added graphical display.
 
 #ifndef _ANALOGCIRCUIT_H_
 #define _ANALOGCIRCUIT_H_
