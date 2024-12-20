@@ -1,9 +1,5 @@
 //Component.h - abstract base class for electronic components
 
-//
-// 19-May-22  M. Watler         Created.
-// 27-May-22  M. Watler         Added graphical display.
-
 #ifndef _COMPONENT_H_
 #define _COMPONENT_H_
 
