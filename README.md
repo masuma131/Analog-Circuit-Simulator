@@ -40,7 +40,7 @@ To set up and run the Analog Circuit Simulator, follow these steps:
 
 ### Prerequisites
 
-- A C++ compiler (e.g., Visual Studio 2017 or later)
+- Visual Studio 2017 or later
 - OpenGL library
 
 ### Steps to Set Up
@@ -53,7 +53,7 @@ To set up and run the Analog Circuit Simulator, follow these steps:
 2. **Open the Project in Visual Studio**
 Open the .sln file provided in the repository using Microsoft Visual Studio.
 
-Install OpenGL Dependencies
+3. **Install OpenGL Dependencies**
 
 Right-click on "References" in the Solution Explorer and select Manage NuGet Packages.
 Open the Package Manager Console tab at the bottom of Visual Studio.
@@ -62,10 +62,10 @@ In the prompt, type the following command and press Enter:
 Install-Package nupengl.core
 ```
 
-3. **Build the Project**
+4. **Build the Project**
 Press Ctrl + Shift + B or select Build Solution from the menu to compile the project.
 
-4. **Run the Project**
+5. **Run the Project**
 Press F5 or click the Start button in Visual Studio to run the Analog Circuit Simulator.
 
 ## Additional Resources
