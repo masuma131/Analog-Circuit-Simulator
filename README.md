@@ -21,9 +21,9 @@ A visually interactive **Analog Circuit Simulator** built using **C++** and the 
 
 1. **Circuit Components**:  
    The project simulates an RLC circuit using the following equations:
-   - Resistor Voltage: \( V_R(t) = i \times R \)
-   - Inductor Voltage: \( V_L(t) = L \frac{\Delta i}{\Delta t} \)
-   - Capacitor Voltage: \( V_C(t) = V_0 + \frac{1}{C} \int i \, dt \)
+   - Resistor Voltage: V_R(t) = i × R
+   - Inductor Voltage: V_L(t) = L × (Δi / Δt)
+   - Capacitor Voltage: V_C(t) = V_0 + (1 / C) ∫i dt
 
 2. **Numerical Methods**:  
    **Euler's Method** is employed to approximate the above equations with small time steps.
