@@ -2,7 +2,7 @@
 
 A visually interactive **Analog Circuit Simulator** built using **C++** and the **OpenGL library**, designed to simulate the behavior of RLC circuits in real-time. This project demonstrates the application of numerical methods to predict circuit behavior and provides a graphical visualization of voltage variations across components.
 
-![Project Screenshot](Sample Run.png)
+![Project Screenshot](SampleRun.png)
 
 ## Features
 
