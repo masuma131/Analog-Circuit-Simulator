@@ -6,10 +6,10 @@ A visually interactive **Analog Circuit Simulator** built using **C++** and the 
 
 ## Features
 
-- **Real-Time Simulation**: Simulates and visualizes voltage across resistors, capacitors, and inductors in an RLC circuit.
-- **Numerical Integration**: Uses **Euler's Method** to approximate differential equations governing circuit components.
-- **Heuristic Optimization**: Implements a cost function to iteratively predict currents with minimal error.
-- **Graphics Rendering**: Dynamic, color-coded visualizations for each circuit component using **OpenGL**.
+- Simulates and visualizes voltage across resistors, capacitors, and inductors in an RLC circuit.
+- Uses **Euler's Method** to approximate differential equations governing circuit components.
+- Implements a cost function to iteratively predict currents with minimal error.
+- Dynamic, color-coded visualizations for each circuit component using **OpenGL**.
 
 ## Technologies Used
 
