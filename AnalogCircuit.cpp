@@ -1,7 +1,5 @@
 
 //AnalogCircuit.cpp - function definitions for the analog circuit
-// 20-May-22  M. Watler         Created.
-// 27-May-22  M. Watler         Added graphical display.
 
 
 #include <iomanip>//setw
