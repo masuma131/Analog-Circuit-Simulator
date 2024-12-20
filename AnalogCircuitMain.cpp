@@ -1,19 +1,6 @@
 //AnalogCircuitMain.cpp - main function for the analog circuit simulation
 //                        Generate graphs with the OpenGL graphics library
-// 
-// https://content.byui.edu/file/2315e65e-a34a-48d3-814d-4175a2b74ed5/1/intro/165-opengl-visualStudio2017.html
-// Create a project
-// Right-click on "References", then click on Manage Nuget Packages
-// Select Package Manager Console
-// Click on the prompt (where it says PM>), and type: Install-Package nupengl.core Then press enter.
-//
-// The manual pages for OpenGL can be found at:
-// https://www.opengl.org/Documentation/Specs.html
-// https://www.opengl.org/resources/libraries/glut/spec3/spec3.html
-// https://learn.microsoft.com/en-us/windows/win32/opengl/opengl-reference
-// 
-// 23-May-22  M. Watler         Created.
-// 27-May-22  M. Watler         Added graphical display.
+
 
 #include <iostream>
 #include "AnalogCircuit.h"
