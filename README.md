@@ -51,22 +51,22 @@ To set up and run the Analog Circuit Simulator, follow these steps:
    git clone https://github.com/masuma131/Analog-Circuit-Simulator.git
     ```
 2. **Open the Project in Visual Studio**
-Open the .sln file provided in the repository using Microsoft Visual Studio.
+   Open the .sln file provided in the repository using Microsoft Visual Studio.
 
 4. **Install OpenGL Dependencies**
 
-Right-click on "References" in the Solution Explorer and select Manage NuGet Packages.
-Open the Package Manager Console tab at the bottom of Visual Studio.
-In the prompt, type the following command and press Enter:
-```bash
-Install-Package nupengl.core
-```
+   Right-click on "References" in the Solution Explorer and select Manage NuGet Packages.
+   Open the Package Manager Console tab at the bottom of Visual Studio.
+   In the prompt, type the following command and press Enter:
+   ```bash
+   Install-Package nupengl.core
+   ```
 
 4. **Build the Project**
-Press Ctrl + Shift + B or select Build Solution from the menu to compile the project.
+   Press Ctrl + Shift + B or select Build Solution from the menu to compile the project.
 
 5. **Run the Project**
-Press F5 or click the Start button in Visual Studio to run the Analog Circuit Simulator.
+   Press F5 or click the Start button in Visual Studio to run the Analog Circuit Simulator.
 
 ## Additional Resources
 For detailed instructions on setting up OpenGL in Visual Studio, refer to this [tutorial](https://content.byui.edu/file/2315e65e-a34a-48d3-814d-4175a2b74ed5/1/intro/165-opengl-visualStudio2017.html).
